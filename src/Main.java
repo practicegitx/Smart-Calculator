@@ -21,7 +21,20 @@ public class Main {
                 System.out.println("The program calculates the sum of numbers");
                 continue;
             }
-
+            else if (firstInput[0].matches("/.*"))
+            {
+                System.out.println("Unknown command");
+                continue;
+            }
+            try
+            {
+            if (firstInput[0].matches("\\D+") || (firstInput[0].matches("\\d+") && firstInput[1].matches("\\d+")) ||
+                firstInput[0].matches("\\d+-") || firstInput[0].matches("\\d+\\+"))
+            {
+                System.out.println("Invalid expression");
+                continue;
+            }
+            } catch(Exception e){};
 
             for (int i = 0; i < firstInput.length; i = i + 2)
             {
@@ -38,6 +51,7 @@ public class Main {
 
                 if (i == 0 && firstInput[0].matches("^-?[0-9]\\d*(\\.\\d+)?$")) // if (result == 0 && firstInput[0].matches("\\d"))
                     result = Integer.parseInt(firstInput[0]);
+
 
                 switch (operator)
                 {
@@ -57,7 +71,13 @@ public class Main {
                 }
 
             } // for
-
+            if (firstInput[0].matches("\\+\\d+"))
+            {
+                String value = "";
+                value = firstInput[0].replaceAll("\\+", "");
+                System.out.println(value);
+                continue;
+            }
             if (!firstInput[0].equals("")) // (!firstInput[0].matches("[]*"))
                 System.out.println(result);
             result = 0;
